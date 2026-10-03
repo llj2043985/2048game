@@ -1,0 +1,128 @@
+:root {
+  --page: #171526;
+  --panel: #26223c;
+  --board: #3a3556;
+  --empty: rgba(255, 255, 255, 0.09);
+  --text: #f8f7ff;
+  --muted: #bab5d3;
+  --accent: #ffb44d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  color: var(--text);
+  font-family: "Microsoft YaHei", system-ui, sans-serif;
+  background: radial-gradient(circle at 15% 10%, #4b3470 0, transparent 34%),
+    radial-gradient(circle at 90% 90%, #183d55 0, transparent 35%), var(--page);
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  color: #241b10;
+  background: var(--accent);
+  padding: 11px 16px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .15s ease, filter .15s ease;
+}
+
+button:hover { filter: brightness(1.08); transform: translateY(-1px); }
+button:active { transform: translateY(1px); }
+
+.game-shell {
+  width: min(92vw, 520px);
+  margin: 32px auto;
+}
+
+.game-header, .toolbar, .scores, .message-actions { display: flex; }
+.game-header, .toolbar { align-items: center; justify-content: space-between; gap: 16px; }
+.scores { gap: 9px; }
+
+.eyebrow { margin: 0 0 2px; color: var(--accent); font-size: .78rem; font-weight: 700; letter-spacing: .12em; }
+h1 { margin: 0; font-size: clamp(3.4rem, 12vw, 5.25rem); line-height: .9; letter-spacing: -.08em; }
+
+.score-box {
+  min-width: 88px;
+  padding: 8px 10px;
+  border-radius: 11px;
+  text-align: center;
+  background: rgba(255, 255, 255, .1);
+}
+.score-box span { display: block; color: var(--muted); font-size: .69rem; }
+.score-box strong { font-size: 1.2rem; }
+
+.toolbar { margin: 26px 0 13px; }
+.toolbar p { margin: 0; color: var(--muted); font-size: .95rem; }
+.toolbar b { color: var(--accent); }
+
+.board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 11px;
+  padding: 11px;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  background: var(--board);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, .28);
+  touch-action: none;
+}
+
+.tile {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  border-radius: 10px;
+  color: #332337;
+  background: var(--empty);
+  font-size: clamp(1.35rem, 7vw, 2.55rem);
+  font-weight: 900;
+  transition: background-color .15s ease, transform .15s ease;
+}
+.tile:not(.tile-0) { animation: appear .16s ease-out; }
+.tile-2 { background: #eee8ff; }.tile-4 { background: #d8c7ff; }.tile-8 { background: #ffc877; }
+.tile-16 { background: #ffaf70; }.tile-32 { background: #ff8b7b; }.tile-64 { background: #ff697d; color: #fff; }
+.tile-128 { background: #d55ce2; color: #fff; font-size: clamp(1.15rem, 6vw, 2.15rem); }
+.tile-256 { background: #a35ef3; color: #fff; font-size: clamp(1.15rem, 6vw, 2.15rem); }
+.tile-512 { background: #6e72ed; color: #fff; font-size: clamp(1.15rem, 6vw, 2.15rem); }
+.tile-1024 { background: #4f9beb; color: #fff; font-size: clamp(.95rem, 5vw, 1.8rem); }
+.tile-2048, .tile-super { background: #48cdb5; color: #fff; font-size: clamp(.95rem, 5vw, 1.8rem); }
+
+.hint { margin: 18px 0 0; color: var(--muted); text-align: center; font-size: .84rem; }
+
+.message {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(13, 11, 24, .66);
+  backdrop-filter: blur(5px);
+  transition: opacity .2s ease, visibility .2s ease;
+}
+.message.show { visibility: visible; opacity: 1; }
+.message-card { width: min(100%, 360px); padding: 30px; border: 1px solid rgba(255,255,255,.12); border-radius: 18px; text-align: center; background: var(--panel); box-shadow: 0 20px 70px rgba(0,0,0,.4); }
+.message-card p:first-child { margin: 0; font-size: 2rem; font-weight: 900; }
+.message-card p:nth-child(2) { margin: 10px 0 24px; color: var(--muted); }
+.message-actions { justify-content: center; gap: 10px; flex-wrap: wrap; }
+#continue-button { background: #e9e4ff; }
+
+@keyframes appear { from { transform: scale(.72); } to { transform: scale(1); } }
+
+@media (max-width: 410px) {
+  .game-shell { margin: 20px auto; }
+  .toolbar { align-items: flex-end; }
+  .toolbar p { max-width: 190px; }
+  .board { gap: 8px; padding: 8px; border-radius: 13px; }
+}

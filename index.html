@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1c1930" />
+    <title>2048 · 合成数字</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <header class="game-header">
+        <div>
+          <p class="eyebrow">数字合成挑战</p>
+          <h1>2048</h1>
+        </div>
+        <div class="scores" aria-label="分数信息">
+          <div class="score-box"><span>当前得分</span><strong id="score">0</strong></div>
+          <div class="score-box"><span>最高分</span><strong id="best-score">0</strong></div>
+        </div>
+      </header>
+
+      <section class="toolbar">
+        <p>合并相同数字，抵达 <b>2048</b>！</p>
+        <button id="restart-button" type="button">重新开始</button>
+      </section>
+
+      <section id="board" class="board" aria-label="2048 游戏棋盘" role="grid"></section>
+      <p class="hint">使用方向键、WASD 或在手机上滑动来移动方块。</p>
+    </main>
+
+    <div id="message" class="message" aria-live="polite" aria-hidden="true">
+      <div class="message-card">
+        <p id="message-title"></p>
+        <p id="message-text"></p>
+        <div class="message-actions">
+          <button id="continue-button" type="button">继续挑战</button>
+          <button id="message-restart-button" type="button">再来一局</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
